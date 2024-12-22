@@ -1,0 +1,29 @@
+public class CarController : MonoBehaviour
+{
+    public float speed;
+    public WheelCollider[] wheels;
+    public float steerAngle;
+
+    void Update()
+    {
+        float horizontalInput = Input.GetAxis("Horizontal");
+        float verticalInput = Input.GetAxis("Vertical");
+
+        // Calculate steering angle
+        float steering = horizontalInput * steerAngle;
+        wheels[0].steerAngle = steering;
+        wheels[1].steerAngle = steering;
+
+        // Apply forward force
+        wheels[2].motorTorque = verticalInput * speed;
+        wheels[3].motorTorque = verticalInput * speed;
+    }
+}
+void OnCollisionEnter(Collision collision)
+{
+    if (collision.gameObject.tag == "Obstacle")
+    {
+        // Handle collision, e.g., reduce health, game over
+    }
+}
+transform.position
